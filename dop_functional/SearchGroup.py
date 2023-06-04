@@ -8,7 +8,7 @@ def all_name_groups():
     url = "https://wappi.pro/api/sync/chats/get?profile_id=63ef4aa6-5fa6&limit=200&show_all=true&offset=0"
 
     headers = {
-      'Authorization': 'bc3a77929d580abaddf0beedb165f0d8e0e9c3a3'
+      'Authorization': ''
     }
 
     response = requests.request("GET", url, headers=headers).json()["dialogs"]
@@ -43,7 +43,7 @@ async def malling_users(photo_malling, date_malling, text_malling, users_group):
                 url = "https://wappi.pro/api/async/message/img/send?profile_id=63ef4aa6-5fa6"
                 payload = f"{{\r\n    \"recipient\" : \"{user_id.split('@')[0]}\",\r\n    \"caption\": \"{text_malling}\",\r\n    \"b64_file\" : \"{photo_malling}\"\r\n}}".encode("utf-8")
                 headers = {
-                    'Authorization': 'bc3a77929d580abaddf0beedb165f0d8e0e9c3a3'
+                    'Authorization': ''
                 }
                 requests.request("POST", url, headers=headers, data=payload)
 
@@ -52,14 +52,14 @@ async def malling_users(photo_malling, date_malling, text_malling, users_group):
                 payload = f"{{\r\n    \"body\":\"{text_malling}\",\r\n    \"recipient\":\"{user_id.split('@')[0]}\"\r\n}}".encode("utf-8")
 
                 headers = {
-                    'Authorization': 'bc3a77929d580abaddf0beedb165f0d8e0e9c3a3'
+                    'Authorization': ''
                 }
                 requests.request("POST", url, headers=headers, data=payload)
 
 
 def check_number(phone):
     url = f"https://wappi.pro/api/sync/contact/check?profile_id=63ef4aa6-5fa6&phone={phone}"
-    headers = {'Authorization': 'bc3a77929d580abaddf0beedb165f0d8e0e9c3a3'}
+    headers = {'Authorization': ''}
 
     response = requests.request("GET", url, headers=headers).json()["on_whatsapp"]
 
@@ -74,7 +74,7 @@ async def get_excel(message, bot):
         url = f"https://wappi.pro/api/sync/chats/get?profile_id=63ef4aa6-5fa6&limit=200&&offset={i}"
 
         headers = {
-            'Authorization': 'bc3a77929d580abaddf0beedb165f0d8e0e9c3a3'
+            'Authorization': ''
         }
         try:
             response = requests.request("GET", url, headers=headers).json()["dialogs"]
@@ -118,7 +118,7 @@ async def malling_users_excel(photo_malling, date_malling, text_malling, users_g
             url = "https://wappi.pro/api/async/message/img/send?profile_id=63ef4aa6-5fa6"
             payload = f"{{\r\n    \"recipient\" : \"{user}\",\r\n    \"caption\": \"{text_malling}\",\r\n    \"b64_file\" : \"{photo_malling}\"\r\n}}".encode("utf-8")
             headers = {
-                'Authorization': 'bc3a77929d580abaddf0beedb165f0d8e0e9c3a3'
+                'Authorization': ''
             }
             requests.request("POST", url, headers=headers, data=payload)
 
@@ -127,6 +127,6 @@ async def malling_users_excel(photo_malling, date_malling, text_malling, users_g
             payload = f"{{\r\n    \"body\":\"{text_malling}\",\r\n    \"recipient\":\"{user}\"\r\n}}".encode("utf-8")
 
             headers = {
-                'Authorization': 'bc3a77929d580abaddf0beedb165f0d8e0e9c3a3'
+                'Authorization': ''
             }
             requests.request("POST", url, headers=headers, data=payload)
