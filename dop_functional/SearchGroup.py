@@ -5,7 +5,7 @@ import openpyxl
 
 
 def all_name_groups():
-    url = "https://wappi.pro/api/sync/chats/get?profile_id=63ef4aa6-5fa6&limit=200&show_all=true&offset=0"
+    url = "profile_id=63ef4aa6-5fa6&limit=200&show_all=true&offset=0"
 
     headers = {
       'Authorization': ''
@@ -40,7 +40,7 @@ async def malling_users(photo_malling, date_malling, text_malling, users_group):
         user_id = user["JID"]
         if not user["IsAdmin"]:
             if photo_malling:
-                url = "https://wappi.pro/api/async/message/img/send?profile_id=63ef4aa6-5fa6"
+                url = "profile_id=63ef4aa6-5fa6"
                 payload = f"{{\r\n    \"recipient\" : \"{user_id.split('@')[0]}\",\r\n    \"caption\": \"{text_malling}\",\r\n    \"b64_file\" : \"{photo_malling}\"\r\n}}".encode("utf-8")
                 headers = {
                     'Authorization': ''
@@ -48,7 +48,7 @@ async def malling_users(photo_malling, date_malling, text_malling, users_group):
                 requests.request("POST", url, headers=headers, data=payload)
 
             else:
-                url = "https://wappi.pro/api/async/message/send?profile_id=63ef4aa6-5fa6"
+                url = "profile_id=63ef4aa6-5fa6"
                 payload = f"{{\r\n    \"body\":\"{text_malling}\",\r\n    \"recipient\":\"{user_id.split('@')[0]}\"\r\n}}".encode("utf-8")
 
                 headers = {
@@ -58,7 +58,7 @@ async def malling_users(photo_malling, date_malling, text_malling, users_group):
 
 
 def check_number(phone):
-    url = f"https://wappi.pro/api/sync/contact/check?profile_id=63ef4aa6-5fa6&phone={phone}"
+    url = f"profile_id=63ef4aa6-5fa6&phone={phone}"
     headers = {'Authorization': ''}
 
     response = requests.request("GET", url, headers=headers).json()["on_whatsapp"]
@@ -71,7 +71,7 @@ async def get_excel(message, bot):
     all_info = []
 
     while True:
-        url = f"https://wappi.pro/api/sync/chats/get?profile_id=63ef4aa6-5fa6&limit=200&&offset={i}"
+        url = f"profile_id=63ef4aa6-5fa6&limit=200&&offset={i}"
 
         headers = {
             'Authorization': ''
@@ -115,7 +115,7 @@ async def malling_users_excel(photo_malling, date_malling, text_malling, users_g
 
     for user in users_group:
         if photo_malling:
-            url = "https://wappi.pro/api/async/message/img/send?profile_id=63ef4aa6-5fa6"
+            url = "profile_id=63ef4aa6-5fa6"
             payload = f"{{\r\n    \"recipient\" : \"{user}\",\r\n    \"caption\": \"{text_malling}\",\r\n    \"b64_file\" : \"{photo_malling}\"\r\n}}".encode("utf-8")
             headers = {
                 'Authorization': ''
@@ -123,7 +123,7 @@ async def malling_users_excel(photo_malling, date_malling, text_malling, users_g
             requests.request("POST", url, headers=headers, data=payload)
 
         else:
-            url = "https://wappi.pro/api/async/message/send?profile_id=63ef4aa6-5fa6"
+            url = "profile_id=63ef4aa6-5fa6"
             payload = f"{{\r\n    \"body\":\"{text_malling}\",\r\n    \"recipient\":\"{user}\"\r\n}}".encode("utf-8")
 
             headers = {
